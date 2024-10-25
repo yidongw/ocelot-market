@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -91,7 +91,9 @@ const IconWall = ({ size = 56 }) => {
     return (
       <g
         key={`${row}-${col}`}
-        transform={`translate(${x}, ${y}) rotate(-45, ${size / 2}, ${size / 2})`}
+        transform={`translate(${x}, ${y}) rotate(-45, ${size / 2}, ${
+          size / 2
+        })`}
       >
         <svg width={size} height={size} viewBox="0 0 4091.27 4091.73">
           <path
@@ -155,7 +157,7 @@ const IconWall = ({ size = 56 }) => {
   );
 };
 
-export default function IndexPage() {
+export default function Home() {
   const theme = useMantineTheme();
   const desktopMatches = useMediaQuery("(min-width: 48em)");
 

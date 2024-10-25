@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import {
   Box,
@@ -54,7 +54,6 @@ const stakingList = [
 ];
 
 export default function GrowPage() {
-
   // const {data} = useRoochClientQuery('getBalance', {
   //   owner: '',
   //   coinType: 'GROW'
