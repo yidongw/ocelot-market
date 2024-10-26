@@ -1,4 +1,5 @@
 "use client";
+
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -184,7 +185,7 @@ export default function Home() {
             <Group mt="lg">
               <Button
                 component={Link}
-                href="/grow"
+                href="/stake"
                 radius="md"
                 variant="outline"
                 size="md"

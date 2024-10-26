@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from 'next/navigation'
 import {
   Box,
   Container,
@@ -14,9 +14,14 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import LogoSVG from "../assets/logo.svg";
 
 import { IconMenu2 } from "@tabler/icons-react";
+import {useConnectWallet, useCurrentAddress, useWallets} from '@roochnetwork/rooch-sdk-kit'
+import {shortAddress} from '../utils/address'
 
 function DesktopNavigationBar({ style }: { style?: Object }) {
-  const router = useRouter();
+  const currentAddress = useCurrentAddress()
+  const pathname = usePathname();
+  const wallets = useWallets();
+  const {mutateAsync: connectWallet} = useConnectWallet()
 
   return (
     <Box style={style}>
@@ -30,16 +35,16 @@ function DesktopNavigationBar({ style }: { style?: Object }) {
             href="/"
             c="dark"
             underline="never"
-            fw={router.pathname === "/" ? "500" : "400"}
+            fw={pathname === "/" ? "500" : "400"}
           >
             Home
           </Anchor>
           <Anchor
             component={Link}
-            href="/grow"
+            href="/stake"
             c="dark"
             underline="never"
-            fw={router.pathname === "/grow" ? "500" : "400"}
+            fw={pathname === "/grow" ? "500" : "400"}
           >
             Get $GROW
           </Anchor>
@@ -48,12 +53,16 @@ function DesktopNavigationBar({ style }: { style?: Object }) {
             href=""
             c="dark"
             underline="never"
-            fw={router.pathname === "" ? "500" : "400"}
+            fw={pathname === "" ? "500" : "400"}
           >
             Ideas
           </Anchor>
-          <Button radius="md" ml="auto">
-            Connect Wallet
+          <Button radius="md" ml="auto" onClick={() => {
+            connectWallet({
+              wallet: wallets[0]
+            })
+          }}>
+            {currentAddress ? shortAddress(currentAddress.toStr()) : 'Connect Wallet'}
           </Button>
         </Flex>
       </Container>
@@ -62,8 +71,8 @@ function DesktopNavigationBar({ style }: { style?: Object }) {
 }
 
 function MobileNavigationBar({ style }: { style?: Object }) {
-  const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
+  const pathname = usePathname();
 
   return (
     <Box style={style}>
@@ -90,7 +99,7 @@ function MobileNavigationBar({ style }: { style?: Object }) {
           <Button
             component={Link}
             href="/"
-            fw={router.pathname === "/" ? "500" : "400"}
+            fw={pathname === "/" ? "500" : "400"}
             style={{ borderRadius: "0.325rem" }}
           >
             Home
@@ -98,7 +107,7 @@ function MobileNavigationBar({ style }: { style?: Object }) {
           <Button
             component={Link}
             href="/grow"
-            fw={router.pathname === "/grow" ? "500" : "400"}
+            fw={pathname === "/grow" ? "500" : "400"}
             style={{ borderRadius: "0.325rem" }}
           >
             Get $GROW
@@ -106,7 +115,7 @@ function MobileNavigationBar({ style }: { style?: Object }) {
           <Button
             component={Link}
             href=""
-            fw={router.pathname === "" ? "500" : "400"}
+            fw={pathname === "" ? "500" : "400"}
             style={{ borderRadius: "0.325rem" }}
           >
             Ideas

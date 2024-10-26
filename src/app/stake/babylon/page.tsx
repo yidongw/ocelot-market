@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Anchor,
@@ -11,8 +13,8 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import NavigationBar from "../../components/NavigationBar";
-import Footer from "../../components/Footer";
+import NavigationBar from "../../../components/NavigationBar";
+import Footer from "../../../components/Footer";
 
 import { IconHome } from "@tabler/icons-react";
 

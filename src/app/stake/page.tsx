@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import {
   Box,
@@ -17,6 +18,10 @@ import Footer from "../../components/Footer";
 import Staking1SVG from "../../assets/staking-1.svg";
 import Staking2SVG from "../../assets/staking-2.svg";
 import Staking3SVG from "../../assets/staking-3.svg";
+import {getTokenInfo, TokenInfo} from './util'
+import {useRoochClient, useRoochClientQuery} from '@roochnetwork/rooch-sdk-kit'
+import {useEffect, useState} from 'react'
+import {useNetworkVariable} from '../networks'
 
 const stakingList = [
   {
@@ -25,7 +30,7 @@ const stakingList = [
     description:
       "Stake your BTC in the Babylon's native self-custodial staking protocol.",
     link: {
-      href: "/grow/babylonstaking",
+      href: "/stake/babylon",
       label: "Stake",
       icon: "",
     },
@@ -46,7 +51,7 @@ const stakingList = [
     title: "Self Staking",
     description: "Stake your BTC in your own wallet by holding it.",
     link: {
-      href: "/grow/selfstaking",
+      href: "/stake/self",
       label: "Stake",
       icon: "",
     },
@@ -54,15 +59,67 @@ const stakingList = [
 ];
 
 export default function GrowPage() {
-  // const {data} = useRoochClientQuery('getBalance', {
-  //   owner: '',
-  //   coinType: 'GROW'
-  // })
+  const client = useRoochClient()
+  const contractAddr = useNetworkVariable('contractAddr')
+  const [tokenInfo, setTokenInfo] = useState<TokenInfo>()
+  const [timeRemaining, setTimeRemaining] = useState(0)
+  useEffect(() => {
+    getTokenInfo(client, contractAddr).then((result) => {
+      setTokenInfo(result)
+      setTimeRemaining(result.data.timeRemaining)
+      console.log(result)
+    }).finally(() => {
+      console.log('hah')
+    })
+  }, [client, contractAddr])
+
+  useEffect(() => {
+    if (!tokenInfo) {
+      return
+    }
+    const interval = setInterval(() => {
+      const now = Date.now() / 1000;
+      setTimeRemaining(tokenInfo?.data.endTime - now);
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, [tokenInfo])
+
   return (
     <>
       <NavigationBar />
 
       <Container pt="1rem" pb="4rem" size="lg">
+        <Card radius="lg" p="lg" bg="gray.0" mb="2rem">
+          <Flex justify="space-between">
+            <Box>
+              <Title order={4} fw="500">
+                $GROW Info
+              </Title>
+              <Text mt="4" c="gray.7">
+                Time Remaining : {
+                tokenInfo?
+                  `${Math.floor(timeRemaining / (24 * 3600))} : ${Math.floor((timeRemaining % (24 * 3600)) / 3600)} : ${Math.floor((timeRemaining % 3600) / 60)} : ${Math.floor(timeRemaining % 60)}`:''
+                }
+              </Text>
+              <Text mt="4" c="gray.7">
+                Total stake:
+              </Text>
+            </Box>
+
+            <Box ta="right">
+              <Title order={4} fw="500">
+                $GROW
+              </Title>
+              <Text mt="4" c="gray.7">
+              </Text>
+              <Text mt="4" c="gray.7">
+                Your Balance
+              </Text>
+            </Box>
+          </Flex>
+        </Card>
         <Card radius="lg" p="lg" bg="gray.0" mb="2rem">
           <Flex justify="space-between">
             <Box>
