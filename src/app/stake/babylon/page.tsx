@@ -17,8 +17,20 @@ import NavigationBar from "../../../components/NavigationBar";
 import Footer from "../../../components/Footer";
 
 import { IconHome } from "@tabler/icons-react";
+import {useCurrentAddress, useRoochClientQuery} from '@roochnetwork/rooch-sdk-kit'
+import {StakeCard} from '../../../components/stake-card'
 
 export default function BabylonStakingPage() {
+  const addr = useCurrentAddress()
+
+  const {data: bbns} = useRoochClientQuery('queryObjectStates', {
+    filter: {
+      object_type_with_owner: {
+        owner: addr?.toStr() || '',
+        object_type: '0x4::bbn::BBNStakeSeal'
+      }
+    }
+  })
   return (
     <>
       <NavigationBar />
@@ -49,45 +61,19 @@ export default function BabylonStakingPage() {
               on the official Babylon Staking Dashboard.
             </Text>
             <Text c="gray.7">
-              For each BTC you stake, you will receive 450 $GROW. (Time weight
-              15months)
+              For each BTC you stake, you will receive 450 $GROW.
+            </Text>
+            <Text c="gray.7">
+              (y = x^(1/2)  x is lock day, x not exceeding 1000, so y never over 31 and bbn stake weight is 22)
             </Text>
           </Stack>
 
-          <Card
-            flex={{ base: "auto", sm: 2 }}
-            withBorder
-            bg="gray.0"
-            radius="lg"
-            p="lg"
-          >
-            <Stack gap="md">
-              <Flex justify="space-between">
-                <Text fw="500">Total Staked BTC in Babylon</Text>
-                <Text c="gray.7">10 BTC</Text>
-              </Flex>
-              <Flex justify="space-between">
-                <Text fw="500">Eligible $GROW</Text>
-                <Text c="gray.7">4,500 $GROW</Text>
-              </Flex>
-              <Flex justify="space-between">
-                <Text fw="500">Claimed $GROW</Text>
-                <Text c="gray.7">2,000 $GROW</Text>
-              </Flex>
-              <Button
-                component={Link}
-                href=""
-                target="_blank"
-                size="md"
-                radius="md"
-              >
-                Stake BTC on Babylon Staking Dashboard
-              </Button>
-              <Button size="md" radius="md">
-                Claim
-              </Button>
-            </Stack>
-          </Card>
+          <StakeCard target={'bbn'} assets={bbns?.data.map((item) => {
+            return {
+              id: item.id,
+              value: item.decoded_value?.value['staking_value'] as string
+            }
+          }) || []}/>
         </Flex>
       </Container>
 

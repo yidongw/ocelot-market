@@ -8,7 +8,6 @@ import {
   Container,
   Flex,
   Grid,
-  Image,
   Text,
   Title,
 } from "@mantine/core";
@@ -19,7 +18,7 @@ import Staking1SVG from "../../assets/staking-1.svg";
 import Staking2SVG from "../../assets/staking-2.svg";
 import Staking3SVG from "../../assets/staking-3.svg";
 import {getTokenInfo, TokenInfo} from './util'
-import {useRoochClient, useRoochClientQuery} from '@roochnetwork/rooch-sdk-kit'
+import { useCurrentAddress, useRoochClient } from '@roochnetwork/rooch-sdk-kit'
 import {useEffect, useState} from 'react'
 import {useNetworkVariable} from '../networks'
 
@@ -60,18 +59,26 @@ const stakingList = [
 
 export default function GrowPage() {
   const client = useRoochClient()
+  const addr = useCurrentAddress()
   const contractAddr = useNetworkVariable('contractAddr')
   const [tokenInfo, setTokenInfo] = useState<TokenInfo>()
   const [timeRemaining, setTimeRemaining] = useState(0)
+  const [balance, setBalance] = useState(0)
   useEffect(() => {
+    if (!addr) {
+      return
+    }
     getTokenInfo(client, contractAddr).then((result) => {
       setTokenInfo(result)
       setTimeRemaining(result.data.timeRemaining)
-      console.log(result)
-    }).finally(() => {
-      console.log('hah')
+      client.getBalance({
+        coinType: result.coinInfo.type,
+        owner: addr.genRoochAddress().toStr() || ''
+      }).then((result) => {
+        setBalance(Number(result.balance))
+      })
     })
-  }, [client, contractAddr])
+  }, [client, contractAddr, addr])
 
   useEffect(() => {
     if (!tokenInfo) {
@@ -86,6 +93,15 @@ export default function GrowPage() {
     return () => clearInterval(interval);
   }, [tokenInfo])
 
+  const formatTimeRemaining = (seconds: number) => {
+    const days = Math.floor(seconds / (24 * 3600));
+    const hours = Math.floor((seconds % (24 * 3600)) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+
+    return `${days} : ${hours} : ${minutes} : ${secs}`;
+  };
+
   return (
     <>
       <NavigationBar />
@@ -97,20 +113,19 @@ export default function GrowPage() {
               <Title order={4} fw="500">
                 $GROW Info
               </Title>
-              <Text mt="4" c="gray.7">
-                Time Remaining : {
-                tokenInfo?
-                  `${Math.floor(timeRemaining / (24 * 3600))} : ${Math.floor((timeRemaining % (24 * 3600)) / 3600)} : ${Math.floor((timeRemaining % 3600) / 60)} : ${Math.floor(timeRemaining % 60)}`:''
-                }
+              <Text mt="4" c="gray.7" style={{ display: 'flex' }}>
+                <span style={{ minWidth: '150px' }}>Time Remaining :</span>
+                <span>{tokenInfo ? formatTimeRemaining(timeRemaining) : ''}</span>
               </Text>
-              <Text mt="4" c="gray.7">
-                Total stake:
+              <Text mt="4" c="gray.7" style={{ display: 'flex' }}>
+                <span style={{ minWidth: '150px' }}>Total stake :</span>
+                <span>{tokenInfo?.data.assetTotalValue} stas</span>
               </Text>
             </Box>
 
             <Box ta="right">
               <Title order={4} fw="500">
-                $GROW
+                {balance} $GROW
               </Title>
               <Text mt="4" c="gray.7">
               </Text>
@@ -128,15 +143,6 @@ export default function GrowPage() {
               </Title>
               <Text mt="4" c="gray.7">
                 Choose your choice of BTC staking
-              </Text>
-            </Box>
-
-            <Box ta="right">
-              <Title order={4} fw="500">
-                1,234,567 $GROW
-              </Title>
-              <Text mt="4" c="gray.7">
-                Your Balance
               </Text>
             </Box>
           </Flex>
