@@ -62,9 +62,6 @@ function DesktopNavigationBar({ style }: { style?: Object }) {
            </Anchor>
            <Button radius="md" ml="auto" onClick={() => {
              setShowConnectModel(currentAddress === undefined)
-             // connectWallet({
-             //   wallet: wallets[0]
-             // })
            }}>
              {currentAddress ? shortAddress(currentAddress.toStr()) : 'Connect Wallet'}
            </Button>
@@ -110,8 +107,8 @@ function MobileNavigationBar({ style }: { style?: Object }) {
           </Button>
           <Button
             component={Link}
-            href="/grow"
-            fw={pathname === "/grow" ? "500" : "400"}
+            href="/stake"
+            fw={pathname === "/stake" ? "500" : "400"}
             style={{ borderRadius: "0.325rem" }}
           >
             Get $GROW

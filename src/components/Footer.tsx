@@ -17,9 +17,12 @@ export default function Footer() {
           <Link href="/" style={{ width: "max-content" }}>
             <LogoSVG width={80} />
           </Link>
+
           <Flex gap="xs">
             <Anchor c="dark">
-              <IconBrandX />
+              <Link href="https://twitter.com/RoochNetwork">
+                <IconBrandX />
+              </Link>
             </Anchor>
             <Anchor c="dark">
               <IconBrandInstagram />

@@ -37,7 +37,7 @@ export default function SelfStakingPage() {
           bg="gray.0"
           style={{ borderRadius: "0.75rem" }}
         >
-          <Anchor component={Link} href="/grow" c="dark" underline="never">
+          <Anchor component={Link} href="/stake" c="dark" underline="never">
             <Group gap="4">
               <IconHome size="1rem" />
               <Text>Grow</Text>

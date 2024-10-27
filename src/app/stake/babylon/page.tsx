@@ -42,7 +42,7 @@ export default function BabylonStakingPage() {
           bg="gray.0"
           style={{ borderRadius: "0.75rem" }}
         >
-          <Anchor component={Link} href="/grow" c="dark" underline="never">
+          <Anchor component={Link} href="/stake" c="dark" underline="never">
             <Group gap="4">
               <IconHome size="1rem" />
               <Text>Grow</Text>
@@ -59,9 +59,6 @@ export default function BabylonStakingPage() {
             <Text c="gray.7">
               To get $GROW with Babylon staking, you will need to stake your BTC
               on the official Babylon Staking Dashboard.
-            </Text>
-            <Text c="gray.7">
-              For each BTC you stake, you will receive 450 $GROW.
             </Text>
             <Text c="gray.7">
               (y = x^(1/2)  x is lock day, x not exceeding 1000, so y never over 31 and bbn stake weight is 22)
