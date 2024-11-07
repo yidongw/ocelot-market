@@ -29,8 +29,10 @@ function extractCoinInfoContent(input: string): string | null {
 	return null
 }
 
-export async function getTokenInfo(client: RoochClient,
-																		 address: string): Promise<TokenInfo> {
+export async function getTokenInfo(
+	client: RoochClient,
+	address: string
+): Promise<TokenInfo> {
 	const result = await client.getStates({
 		accessPath: `/resource/${address}/${address}::grow_bitcoin::FarmingAsset`,
 		stateOption: {
@@ -39,6 +41,7 @@ export async function getTokenInfo(client: RoochClient,
 		},
 	})
 
+	console.log(result)
 	const data = result[0];
 	const decode = (((data.decoded_value as any).value as any).value as any).value as any;
 	const startTime= decode['start_time'] as number;

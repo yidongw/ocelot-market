@@ -8,7 +8,9 @@ interface CreateSessionModalProps {
 }
 export const CreateSessionModal: React.FC<CreateSessionModalProps> = ({ isOpen, onClose }) => {
 	const {mutateAsync: createSessionKey} = useCreateSessionKey()
-	const contractAddr = useNetworkVariable('contractAddr')
+	// const contractAddr = useNetworkVariable('contractAddr')
+
+	const contractAddr = "0x3";
 
 	const handleCreateSession = async () => {
 		await createSessionKey({

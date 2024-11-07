@@ -160,8 +160,8 @@ export const StakeCard: React.FC<StakeCardProps> = ({ target, assets }) => {
 				<Flex justify="space-between" mt="md">
 					{
 						action === 'claim' ? <>
-								<Text fw="500">Eligible $GROW</Text>
-								<Text c="gray.7">{stakeInfo?.harvest} $GROW</Text>
+								<Text fw="500">Eligible $RGAS</Text>
+								<Text c="gray.7">{stakeInfo?.harvest} $RGAS</Text>
 							</> : action === 'unStake' ? <Text fw="500">
 							No revenue has been generated
 						</Text>:<></>

@@ -19,50 +19,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
 
-import { IconQuestionMark, IconChevronCompactRight } from "@tabler/icons-react";
-import Step1SVG from "../assets/step-1.svg";
-import Step2SVG from "../assets/step-2.svg";
-import Step3SVG from "../assets/step-3.svg";
-import Step4SVG from "../assets/step-4.svg";
-
-const FaqList = [
-  {
-    icon: "",
-    title: "What is Grow Bitcoin?",
-    description:
-      "Grow Bitcoin is a platform that allows users to stake their Bitcoin to back ideas. Users can vote on ideas and earn $GROW tokens.",
-  },
-  {
-    icon: "",
-    title: "What is Grow Bitcoin?",
-    description:
-      "Grow Bitcoin is a platform that allows users to stake their Bitcoin to back ideas. Users can vote on ideas and earn $GROW tokens.",
-  },
-  {
-    icon: "",
-    title: "What is Grow Bitcoin?",
-    description:
-      "Grow Bitcoin is a platform that allows users to stake their Bitcoin to back ideas. Users can vote on ideas and earn $GROW tokens.",
-  },
-  {
-    icon: "",
-    title: "What is Grow Bitcoin?",
-    description:
-      "Grow Bitcoin is a platform that allows users to stake their Bitcoin to back ideas. Users can vote on ideas and earn $GROW tokens.",
-  },
-  {
-    icon: "",
-    title: "What is Grow Bitcoin?",
-    description:
-      "Grow Bitcoin is a platform that allows users to stake their Bitcoin to back ideas. Users can vote on ideas and earn $GROW tokens.",
-  },
-  {
-    icon: "",
-    title: "What is Grow Bitcoin?",
-    description:
-      "Grow Bitcoin is a platform that allows users to stake their Bitcoin to back ideas. Users can vote on ideas and earn $GROW tokens.",
-  },
-];
+import PredictionList from "../components/PredictionList";
 
 const IconWall = ({ size = 56 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -159,174 +116,28 @@ const IconWall = ({ size = 56 }) => {
 };
 
 export default function Home() {
-  const theme = useMantineTheme();
-  const desktopMatches = useMediaQuery("(min-width: 48em)");
-
   return (
     <>
       <Box
         component="header"
-        py={{ base: "12rem", md: "16rem" }}
-        style={{ position: "relative" }}
+        pt={{ base: "12rem", md: "16rem" }}
+        style={{ 
+          position: "relative",
+          backgroundColor: "#1A1B1E"
+        }}
       >
         <NavigationBar
           style={{ position: "absolute", zIndex: 9, top: 0, left: 0, right: 0 }}
         />
 
-        <IconWall />
+        {/* <IconWall /> */}
         <Container size="lg" style={{ position: "relative", zIndex: 2 }}>
           <Stack align="center" gap="0">
-            <Title order={1} fz={{ base: "3.5rem", md: "5rem" }} fw="200">
-              Grow Bitcoin
-            </Title>
-            <Text size="lg" c="gray.7">
-              Backing Ideas with Bitcoin Staking
-            </Text>
-            <Group mt="lg">
-              <Button
-                component={Link}
-                href="/stake"
-                radius="md"
-                variant="outline"
-                size="md"
-              >
-                Get $GROW
-              </Button>
-              <Button radius="md" size="md" disabled={true}>
-                Vote for Ideas (coming soon)
-              </Button>
-            </Group>
+            <PredictionList />
           </Stack>
         </Container>
+        <Footer />
       </Box>
-
-      <Box component="section" py="4rem" bg="gray.0">
-        <Container size="lg">
-          <Flex
-            gap={{ base: "3rem", xs: "2.5rem 4%", sm: "md" }}
-            align="flex-top"
-            wrap={{ base: "wrap", sm: "nowrap" }}
-          >
-            <Stack
-              gap="0"
-              ta="center"
-              align="center"
-              w={{ base: "100%", xs: "48%", sm: "auto" }}
-            >
-              <ThemeIcon size="5rem" radius="50%">
-                <Step1SVG width={30} />
-              </ThemeIcon>
-              <Title order={3} size="1.25rem" fw="500" mt="12" mb="4">
-                Stake
-              </Title>
-              <Text size="md" c="gray.7">
-                Stake Bitcoin via Babylon, LRT or Self-Staking
-              </Text>
-            </Stack>
-            <IconChevronCompactRight
-              size="5rem"
-              style={{
-                alignSelf: "center",
-                display: desktopMatches ? "block" : "none",
-              }}
-              color={theme.colors.gray[2]}
-            />
-            <Stack
-              gap="0"
-              ta="center"
-              align="center"
-              w={{ base: "100%", xs: "48%", sm: "auto" }}
-            >
-              <ThemeIcon size="5rem" radius="50%">
-                <Step2SVG width={40} />
-              </ThemeIcon>
-              <Title order={3} size="1.25rem" fw="500" mt="12" mb="4">
-                Claim
-              </Title>
-              <Text size="md" c="gray.7">
-                Claim your $GROW token with your staking
-              </Text>
-            </Stack>
-            <IconChevronCompactRight
-              size="5rem"
-              style={{
-                alignSelf: "center",
-                display: desktopMatches ? "block" : "none",
-              }}
-              color={theme.colors.gray[2]}
-            />
-            <Stack
-              gap="0"
-              ta="center"
-              align="center"
-              w={{ base: "100%", xs: "48%", sm: "auto" }}
-            >
-              <ThemeIcon size="5rem" radius="50%">
-                <Step3SVG width={36} />
-              </ThemeIcon>
-              <Title order={3} size="1.25rem" fw="500" mt="12" mb="4">
-                Vote
-              </Title>
-              <Text size="md" c="gray.7">
-                Vote for Ideas with your $GROW token
-              </Text>
-            </Stack>
-            <IconChevronCompactRight
-              size="5rem"
-              style={{
-                alignSelf: "center",
-                display: desktopMatches ? "block" : "none",
-              }}
-              color={theme.colors.gray[2]}
-            />
-            <Stack
-              gap="0"
-              ta="center"
-              align="center"
-              w={{ base: "100%", xs: "48%", sm: "auto" }}
-            >
-              <ThemeIcon size="5rem" radius="50%">
-                <Step4SVG width={44} />
-              </ThemeIcon>
-              <Title order={3} size="1.25rem" fw="500" mt="12" mb="4">
-                Earn
-              </Title>
-              <Text size="md" c="gray.7">
-                Earn tokens as ideas grow into projects.
-              </Text>
-            </Stack>
-          </Flex>
-        </Container>
-      </Box>
-
-      <Box component="section" py="4rem">
-        <Container size="lg">
-          <Stack gap="0">
-            <Title order={2} size="2.75rem">
-              FAQs
-            </Title>
-            <Text c="gray.7">What, Why, and How</Text>
-          </Stack>
-
-          <Grid gutter="2.5rem" mt="3rem">
-            {FaqList.map((i) => (
-              <Grid.Col key={i.title} span={{ base: 12, xs: 6, md: 4 }}>
-                <ThemeIcon size="xl" radius="md">
-                  <IconQuestionMark />
-                </ThemeIcon>
-                <Title order={4} fw="500" mt="10" mb="4">
-                  {i.title}
-                </Title>
-                <Text size="md" c="gray.7">
-                  {i.description}
-                </Text>
-              </Grid.Col>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-
-      <Footer />
     </>
   );
 }

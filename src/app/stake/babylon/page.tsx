@@ -42,7 +42,7 @@ export default function BabylonStakingPage() {
           bg="gray.0"
           style={{ borderRadius: "0.75rem" }}
         >
-          <Anchor component={Link} href="/stake" c="dark" underline="never">
+          <Anchor component={Link} href="/stake" c="white" underline="never">
             <Group gap="4">
               <IconHome size="1rem" />
               <Text>Grow</Text>
@@ -54,10 +54,10 @@ export default function BabylonStakingPage() {
         <Flex align="center" gap="xl" wrap={{ base: "wrap", sm: "nowrap" }}>
           <Stack flex={{ base: "auto", sm: 3 }} gap="sm">
             <Title order={2} fw="500">
-              Get $GROW with Babylon Staking
+              Get $RGAS with Babylon Staking
             </Title>
             <Text c="gray.7">
-              To get $GROW with Babylon staking, you will need to stake your BTC
+              To get $RGAS with Babylon staking, you will need to stake your BTC
               on the official Babylon Staking Dashboard.
             </Text>
             <Text c="gray.7">

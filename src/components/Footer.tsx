@@ -14,24 +14,11 @@ export default function Footer() {
     <Box mt="lg" py="md">
       <Container size="lg">
         <Stack>
-          <Link href="/" style={{ width: "max-content" }}>
-            <LogoSVG width={80} />
-          </Link>
-
           <Flex gap="xs">
-            <Anchor c="dark">
-              <Link href="https://twitter.com/RoochNetwork">
+            <Anchor c="white">
+              <Link href="https://twitter.com/">
                 <IconBrandX />
               </Link>
-            </Anchor>
-            <Anchor c="dark">
-              <IconBrandInstagram />
-            </Anchor>
-            <Anchor c="dark">
-              <IconBrandYoutubeFilled />
-            </Anchor>
-            <Anchor c="dark">
-              <IconBrandLinkedin />
             </Anchor>
           </Flex>
         </Stack>

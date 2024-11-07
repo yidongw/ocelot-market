@@ -14,27 +14,27 @@ type Props = {
 const theme = createTheme({
   fontFamily: "IBM Plex Sans, sans-serif",
   colors: {
-    growBTC: [
-      "#fff6e1",
-      "#ffebcb",
-      "#ffd69a",
-      "#ffbf64",
-      "#ffab37",
-      "#ff9f1b",
-      "#ff9909",
-      "#e38400",
-      "#cb7500",
-      "#b06400",
+    ocelotMarket: [
+      "#FFF5E1", // Lightest cream
+      "#FFE8D1", // Light beige
+      "#E6C39B", // Warm beige
+      "#D4A675", // Light tan
+      "#BC8B4A", // Golden tan
+      "#8B6434", // Medium brown
+      "#634729", // Dark brown
+      "#462F1D", // Darker brown
+      "#2B1810", // Very dark brown
+      "#1A0F0A", // Almost black
     ],
   },
-  primaryColor: "growBTC",
-  primaryShade: 6,
+  primaryColor: "ocelotMarket",
+  primaryShade: 4,
 });
 
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <title>Grow Bitcoin</title>
+      <title>Ocelot market</title>
       <meta
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"

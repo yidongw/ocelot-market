@@ -11,8 +11,8 @@ import {
   Drawer,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import LogoSVG from "../assets/logo.svg";
-
+import LogoPNG from "../assets/logo.png";
+import Image from 'next/image'
 import { IconMenu2 } from "@tabler/icons-react";
 import {useConnectWallet, useCurrentAddress, useWallets} from '@roochnetwork/rooch-sdk-kit'
 import {shortAddress} from '../utils/address'
@@ -31,12 +31,13 @@ function DesktopNavigationBar({ style }: { style?: Object }) {
        <Container size="lg">
          <Flex py="md" align="center" gap="lg">
            <Link href="/">
-             <LogoSVG width={80} />
-           </Link>
+            <Image src={LogoPNG} alt="Logo" width={80} />
+          </Link>
+          
            <Anchor
              component={Link}
              href="/"
-             c="dark"
+             c="white"
              underline="never"
              fw={pathname === "/" ? "500" : "400"}
            >
@@ -44,21 +45,12 @@ function DesktopNavigationBar({ style }: { style?: Object }) {
            </Anchor>
            <Anchor
              component={Link}
-             href="/stake"
-             c="dark"
+             href="/deposit"
+             c="white"
              underline="never"
-             fw={pathname === "/grow" ? "500" : "400"}
+             fw={pathname === "/deposit" ? "500" : "400"}
            >
-             Get $GROW
-           </Anchor>
-           <Anchor
-             component={Link}
-             href=""
-             c="dark"
-             underline="never"
-             fw={pathname === "" ? "500" : "400"}
-           >
-             Ideas
+             Deposit $RGAS
            </Anchor>
            <Button radius="md" ml="auto" onClick={() => {
              setShowConnectModel(currentAddress === undefined)
@@ -80,7 +72,7 @@ function MobileNavigationBar({ style }: { style?: Object }) {
       <Container size="lg">
         <Flex py="md" align="center" gap="lg">
           <Link href="/">
-            <LogoSVG width={80} />
+            <Image src={LogoPNG} alt="Logo" width={80} />
           </Link>
 
           <UnstyledButton
@@ -88,14 +80,14 @@ function MobileNavigationBar({ style }: { style?: Object }) {
             onClick={open}
             style={{ display: "flex", alignItems: "center" }}
           >
-            <IconMenu2 />
+            <IconMenu2 color="white"/>
           </UnstyledButton>
 
           <Button radius="md">Connect Wallet</Button>
         </Flex>
       </Container>
 
-      <Drawer opened={opened} onClose={close} title="Menu">
+      <Drawer opened={opened} onClose={close} title="Menu" bg="dark.7">
         <Stack gap="sm">
           <Button
             component={Link}
@@ -107,19 +99,11 @@ function MobileNavigationBar({ style }: { style?: Object }) {
           </Button>
           <Button
             component={Link}
-            href="/stake"
-            fw={pathname === "/stake" ? "500" : "400"}
+            href="/deposit"
+            fw={pathname === "/deposit" ? "500" : "400"}
             style={{ borderRadius: "0.325rem" }}
           >
-            Get $GROW
-          </Button>
-          <Button
-            component={Link}
-            href=""
-            fw={pathname === "" ? "500" : "400"}
-            style={{ borderRadius: "0.325rem" }}
-          >
-            Ideas
+            Deposit $RGAS
           </Button>
         </Stack>
       </Drawer>

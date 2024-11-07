@@ -111,7 +111,7 @@ export default function GrowPage() {
           <Flex justify="space-between">
             <Box>
               <Title order={4} fw="500">
-                $GROW Info
+                $RGAS Info
               </Title>
               <Text mt="4" c="gray.7" style={{ display: 'flex' }}>
                 <span style={{ minWidth: '150px' }}>Time Remaining :</span>
@@ -125,7 +125,7 @@ export default function GrowPage() {
 
             <Box ta="right">
               <Title order={4} fw="500">
-                {balance} $GROW
+                {balance} $RGAS
               </Title>
               <Text mt="4" c="gray.7">
               </Text>
@@ -139,7 +139,7 @@ export default function GrowPage() {
           <Flex justify="space-between">
             <Box>
               <Title order={4} fw="500">
-                Get $GROW with BTC Staking
+                Get $RGAS with BTC Staking
               </Title>
               <Text mt="4" c="gray.7">
                 Choose your choice of BTC staking

@@ -26,6 +26,11 @@ export default function SelfStakingPage() {
       owner: addr?.toStr() || ''
     }
   })
+
+  console.log("addr: ", addr)
+
+  console.log("utxos: ", utxos)
+
   return (
     <>
       <NavigationBar />
@@ -37,7 +42,7 @@ export default function SelfStakingPage() {
           bg="gray.0"
           style={{ borderRadius: "0.75rem" }}
         >
-          <Anchor component={Link} href="/stake" c="dark" underline="never">
+          <Anchor component={Link} href="/stake" c="white" underline="never">
             <Group gap="4">
               <IconHome size="1rem" />
               <Text>Grow</Text>
@@ -49,14 +54,14 @@ export default function SelfStakingPage() {
         <Flex align="center" gap="xl" wrap={{ base: "wrap", sm: "nowrap" }}>
           <Stack flex={{ base: "auto", sm: 5 }} gap="sm">
             <Title order={2} fw="500">
-              Get $GROW with Self Staking
+              Get $RGAS with Self Staking
             </Title>
             <Text c="gray.7">
-              To get $GROW with Self-Staking, select your Bitcoin UTXO and click
+              To get $RGAS with Self-Staking, select your Bitcoin UTXO and click
               on Stake button to start staking. (Time weight = 1)
             </Text>
             <Text c="gray.7">
-              To get $GROW with Babylon staking, you will need to stake your BTC
+              To get $RGAS with Babylon staking, you will need to stake your BTC
               on the official Babylon Staking Dashboard.
             </Text>
           </Stack>
